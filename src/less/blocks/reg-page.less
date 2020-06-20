@@ -1,0 +1,152 @@
+.main {
+  box-sizing: border-box;
+  padding: 50px 30px;
+
+  width: 700px;
+  min-height: 500px;
+
+  border: 1px solid rgba(191, 191, 191, 1);
+}
+
+.main__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__caption {
+  .discard;
+  margin-bottom: 8px;
+
+  font-size: 50px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.main__passage {
+  margin-bottom: 70px;
+
+  font-size: 20px;
+  text-align: center;
+}
+
+.main__form {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 40px;
+}
+
+.main__form-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 30px;
+
+  &:not(:last-of-type)::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+
+    width: 400px;
+    height: 2px;
+    background-color: rgba(232, 232, 232, 1);
+  }
+}
+
+.main__form-wrapper:last-of-type {
+  justify-content: start;
+  margin-left: 110px;
+}
+
+.main__form-input {
+  box-sizing: border-box;
+  padding: 4px 6px;
+
+  width: 400px;
+  height: 50px;
+
+  border: none;
+  outline: none;
+}
+
+.main__form-agreement {
+  margin-left: 35px;
+  margin-top: 4px;
+
+  font-size: 16px;
+}
+
+.main__form-label {
+  position: relative;
+
+  cursor: pointer;
+}
+
+.main__form-label input[type='checkbox'] + .radio-indicator {
+  position: absolute;
+  top: 0;
+  left: 5px;
+
+  width: 17px;
+  height: 17px;
+
+  border: 2px solid rgba(232, 232, 232, 1);
+}
+
+.main__form-label input[type='checkbox'] + .radio-indicator:hover,
+.main__form-label input[type='checkbox'] + .radio-indicator:focus {
+  border: 3px solid rgba(218, 223, 225, 1);
+}
+
+.main__form-label input[type='checkbox']:checked + .radio-indicator::before {
+  content: ' ';
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - 7px);
+
+  width: 14px;
+  height: 14px;
+
+  background-color: black;
+}
+
+.main__form-button {
+  align-self: center;
+  box-sizing: border-box;
+  padding: 5px;
+
+  width: 400px;
+  min-height: 45px;
+
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: white;
+  background-color: rgba(232, 232, 232, 1);
+  border: none;
+  outline: none;
+}
+
+.main__form-button--active {
+  background-color: black;
+}
+
+.main__sign-in-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__sign-in-span {
+  margin-right: 20px;
+
+  color: grey;
+}
+
+.main__sign-in-button {
+  font-size: 20px;
+
+  border: none;
+  outline: none;
+  background-color: inherit;
+  color: black;
+}
