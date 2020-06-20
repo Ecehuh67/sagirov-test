@@ -36,13 +36,20 @@
   margin-bottom: 40px;
 }
 
+.main__footer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 30px;
+}
+
 .main__form-wrapper {
   display: flex;
   justify-content: center;
   position: relative;
   margin-bottom: 30px;
 
-  &:not(:last-of-type)::before {
+  &::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -50,6 +57,16 @@
     width: 400px;
     height: 2px;
     background-color: rgba(232, 232, 232, 1);
+  }
+}
+
+.main__form-wrapper--incorrect {
+  &::before {
+    background-color: red;
+  }
+
+  & > input {
+    color: red;
   }
 }
 

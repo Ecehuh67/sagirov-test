@@ -1,4 +1,43 @@
+import Inputmask from 'react-input-mask';
+import ReactPasswordStrength from 'react-password-strength';
+import { validateEmail, validatePhone, validateName } from '../../consts';
+
 const SignUp = () => {
+  const [formFields, setFormFields] = React.useState({
+    name: null,
+    nickname: null,
+    email: null,
+    phone: null,
+    password: null,
+    agreement: null,
+  });
+
+  const changeState = (field, value) => {
+    if (value) {
+      setFormFields((prev) => {
+        return {
+          ...prev,
+          [field]: true,
+        };
+      });
+    } else {
+      setFormFields((prev) => {
+        return {
+          ...prev,
+          [field]: false,
+        };
+      });
+    }
+  };
+
+  let password = null;
+
+  const changePassword = (value) => {
+    password = value;
+  };
+
+  console.log(formFields, password);
+
   return (
     <>
       <main className="main html-wrapper">
@@ -12,6 +51,10 @@ const SignUp = () => {
                 type="text"
                 id="name"
                 placeholder="Name"
+                onChange={(evt) => {
+                  const isNameValid = validateName(evt.target.value);
+                  changeState('name', isNameValid);
+                }}
               ></input>
             </div>
             <div className="main__form-wrapper">
@@ -20,6 +63,10 @@ const SignUp = () => {
                 type="text"
                 id="nickName"
                 placeholder="Nickname"
+                onChange={(evt) => {
+                  const isNickNameValid = validateName(evt.target.value);
+                  changeState('nickname', isNickNameValid);
+                }}
               ></input>
             </div>
             <div className="main__form-wrapper">
@@ -28,15 +75,26 @@ const SignUp = () => {
                 type="email"
                 id="email"
                 placeholder="Email"
+                onChange={(evt) => {
+                  const isEmailValid = validateEmail(
+                    evt.target.value,
+                    evt.target.parentNode
+                  );
+                  changeState('email', isEmailValid);
+                }}
               ></input>
             </div>
             <div className="main__form-wrapper">
-              {' '}
-              <input
+              <Inputmask
+                mask="+7 999 999 99 99"
+                maskChar=""
                 className="main__form-input"
-                type="tel"
                 placeholder="Phone"
-              ></input>
+                onChange={(evt) => {
+                  const isPhoneValid = validatePhone(evt.target.value);
+                  changeState('phone', isPhoneValid);
+                }}
+              />
             </div>
             <div className="main__form-wrapper">
               <input
@@ -45,12 +103,16 @@ const SignUp = () => {
                 placeholder="Password"
               ></input>
             </div>
-            <div className="main__form-wrapper">
+            <div className="main__footer">
               <label className="main__form-label">
                 <input
                   className="visually-hidden"
                   id="agreement"
                   type="checkbox"
+                  onChange={(evt) => {
+                    const isChecked = evt.target.checked;
+                    changeState('agreement', isChecked);
+                  }}
                 ></input>
                 <span className="radio-indicator"></span>
               </label>
@@ -59,8 +121,15 @@ const SignUp = () => {
               </span>
             </div>
             <button
-              className="main__form-button"
+              className={
+                Object.keys(formFields).every((it) => formFields[it] === true)
+                  ? 'main__form-button main__form-button--active'
+                  : 'main__form-button'
+              }
               type="button"
+              disabled={Object.keys(formFields).every(
+                (it) => formFields[it] === true
+              )}
               onClick={(evt) => {
                 evt.preventDefault();
               }}
