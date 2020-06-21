@@ -103,7 +103,7 @@ export const validatePassword = (password, callback) => {
   return true;
 };
 
-const shiftState = (field, bool, value, cb) => {
+export const changeState = (field, bool, value, cb) => {
   if (bool) {
     cb((prev) => {
       return {
@@ -123,5 +123,3 @@ const shiftState = (field, bool, value, cb) => {
     });
   }
 };
-
-export const changeState = DEBOUNCE(shiftState);
