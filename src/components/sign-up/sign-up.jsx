@@ -1,8 +1,12 @@
 import Inputmask from 'react-input-mask';
-import ReactPasswordStrength from 'react-password-strength';
-import { validateEmail, validatePhone, validateName } from '../../consts';
+import {
+  validateEmail,
+  validatePhone,
+  validateName,
+  validatePassword,
+} from '../../consts';
 
-const SignUp = () => {
+const SignUp = ({ handler }) => {
   const [formFields, setFormFields] = React.useState({
     name: null,
     nickname: null,
@@ -10,6 +14,11 @@ const SignUp = () => {
     phone: null,
     password: null,
     agreement: null,
+  });
+
+  const [password, setPassword] = React.useState({
+    text: '',
+    color: '',
   });
 
   const changeState = (field, value) => {
@@ -29,14 +38,6 @@ const SignUp = () => {
       });
     }
   };
-
-  let password = null;
-
-  const changePassword = (value) => {
-    password = value;
-  };
-
-  console.log(formFields, password);
 
   return (
     <>
@@ -101,7 +102,17 @@ const SignUp = () => {
                 className="main__form-input"
                 type="password"
                 placeholder="Password"
+                onChange={(evt) => {
+                  const isPasswordValid = validatePassword(
+                    evt.target.value,
+                    setPassword
+                  );
+                  changeState('password', isPasswordValid);
+                }}
               ></input>
+              <span style={{ color: `${password.color}` }}>
+                {password.text}
+              </span>
             </div>
             <div className="main__footer">
               <label className="main__form-label">
@@ -127,9 +138,9 @@ const SignUp = () => {
                   : 'main__form-button'
               }
               type="button"
-              disabled={Object.keys(formFields).every(
-                (it) => formFields[it] === true
-              )}
+              disabled={
+                !Object.keys(formFields).every((it) => formFields[it] === true)
+              }
               onClick={(evt) => {
                 evt.preventDefault();
               }}
@@ -139,7 +150,14 @@ const SignUp = () => {
           </form>
           <div className="main__sign-in-wrapper">
             <span className="main__sign-in-span">Already has account?</span>
-            <button className="main__sign-in-button">Sign in</button>
+            <button
+              className="main__sign-in-button"
+              onClick={() => {
+                handler(true);
+              }}
+            >
+              Sign in
+            </button>
           </div>
         </section>
       </main>

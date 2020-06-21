@@ -5,7 +5,7 @@ import SignIn from '../sign-in/sign-in';
 const App = () => {
   const [isSighIn, setSignIn] = React.useState(false);
 
-  return <>{!isSighIn ? <SignUp /> : <SignIn />}</>;
+  return <>{!isSighIn ? <SignUp handler={setSignIn} /> : <SignIn />}</>;
 };
 
 export default App;

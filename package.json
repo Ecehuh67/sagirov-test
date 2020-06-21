@@ -5,8 +5,7 @@
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-input-mask": "2.0.4",
-    "react-password-strength": "2.4.0"
+    "react-input-mask": "2.0.4"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",

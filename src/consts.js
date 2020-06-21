@@ -1,6 +1,30 @@
 const MIN_LENGTHS = {
   phone: 12,
   name: 3,
+  password: 5,
+};
+
+const GRADES_OF_STRENGTH_PASSWORD = {
+  0: {
+    text: '',
+    color: 'white',
+  },
+  1: {
+    text: 'weak',
+    color: 'red',
+  },
+  2: {
+    text: 'easy',
+    color: 'orange',
+  },
+  3: {
+    text: 'normal',
+    color: 'lightgreen',
+  },
+  4: {
+    text: 'strong',
+    color: 'green',
+  },
 };
 
 export const validateEmail = (value, elem) => {
@@ -29,6 +53,35 @@ export const validatePhone = (phoneNumber) => {
 
 export const validateName = (name) => {
   if (name.length < MIN_LENGTHS.name) {
+    return false;
+  }
+  return true;
+};
+
+export const validatePassword = (password, callback) => {
+  const lowerCaseLetters = /[a-z]/g;
+  const upperCaseLetters = /[A-Z]/g;
+  const numbers = /[0-9]/g;
+  const symbols = /[^a-zA-Z0-9]/g;
+
+  let counter = 0;
+
+  const isLowerLetters = password.match(lowerCaseLetters);
+  const isUpperLetters = password.match(upperCaseLetters);
+  const isNumbers = password.match(numbers);
+  const isSymbols = password.match(symbols);
+
+  const chain = [isLowerLetters, isUpperLetters, isNumbers, isSymbols];
+
+  chain.forEach((el) => {
+    if (el) {
+      counter++;
+    }
+  });
+
+  callback(GRADES_OF_STRENGTH_PASSWORD[counter]);
+
+  if (password.length < MIN_LENGTHS.password) {
     return false;
   }
   return true;
