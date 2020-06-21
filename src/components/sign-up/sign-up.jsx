@@ -5,6 +5,7 @@ import {
   validatePhone,
   validateName,
   validatePassword,
+  changeState,
 } from '../../consts';
 
 const SignUp = ({ changeHandler, userDataHandler }) => {
@@ -41,27 +42,6 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
     color: '',
   });
 
-  const changeState = (field, bool, value) => {
-    if (bool) {
-      setFormFields((prev) => {
-        return {
-          ...prev,
-          [field]: {
-            isFilled: true,
-            value,
-          },
-        };
-      });
-    } else {
-      setFormFields((prev) => {
-        return {
-          ...prev,
-          [field]: false,
-        };
-      });
-    }
-  };
-
   return (
     <>
       {isSigned && <Screen cb={changeHandler} type={'sign-up'} />}
@@ -80,7 +60,12 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
                     placeholder="Name"
                     onChange={(evt) => {
                       const isNameValid = validateName(evt.target.value);
-                      changeState('name', isNameValid, evt.target.value);
+                      changeState(
+                        'name',
+                        isNameValid,
+                        evt.target.value,
+                        setFormFields
+                      );
                     }}
                   ></input>
                 </div>
@@ -95,7 +80,8 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
                       changeState(
                         'nickname',
                         isNickNameValid,
-                        evt.target.value
+                        evt.target.value,
+                        setFormFields
                       );
                     }}
                   ></input>
@@ -111,7 +97,12 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
                         evt.target.value,
                         evt.target.parentNode
                       );
-                      changeState('email', isEmailValid, evt.target.value);
+                      changeState(
+                        'email',
+                        isEmailValid,
+                        evt.target.value,
+                        setFormFields
+                      );
                     }}
                   ></input>
                 </div>
@@ -123,7 +114,12 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
                     placeholder="Phone"
                     onChange={(evt) => {
                       const isPhoneValid = validatePhone(evt.target.value);
-                      changeState('phone', isPhoneValid, evt.target.value);
+                      changeState(
+                        'phone',
+                        isPhoneValid,
+                        evt.target.value,
+                        setFormFields
+                      );
                     }}
                   />
                 </div>
@@ -140,7 +136,8 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
                       changeState(
                         'password',
                         isPasswordValid,
-                        evt.target.value
+                        evt.target.value,
+                        setFormFields
                       );
                     }}
                   ></input>
@@ -156,7 +153,12 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
                       type="checkbox"
                       onChange={(evt) => {
                         const isChecked = evt.target.checked;
-                        changeState('agreement', isChecked, evt.target.checked);
+                        changeState(
+                          'agreement',
+                          isChecked,
+                          evt.target.checked,
+                          setFormFields
+                        );
                       }}
                     ></input>
                     <span className="radio-indicator"></span>

@@ -86,3 +86,24 @@ export const validatePassword = (password, callback) => {
   }
   return true;
 };
+
+export const changeState = (field, bool, value, cb) => {
+  if (bool) {
+    cb((prev) => {
+      return {
+        ...prev,
+        [field]: {
+          isFilled: true,
+          value,
+        },
+      };
+    });
+  } else {
+    cb((prev) => {
+      return {
+        ...prev,
+        [field]: false,
+      };
+    });
+  }
+};
