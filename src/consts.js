@@ -27,7 +27,23 @@ const GRADES_OF_STRENGTH_PASSWORD = {
   },
 };
 
-export const validateEmail = (value, elem) => {
+const DELAY = 1000;
+
+const DEBOUNCE = function (f) {
+  let lastTimeout = false;
+
+  return function () {
+    if (lastTimeout) {
+      clearTimeout(lastTimeout);
+    }
+
+    lastTimeout = setTimeout(() => {
+      f.apply(this, arguments);
+    }, DELAY);
+  };
+};
+
+const checkEmail = (value, elem) => {
   const symbols = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
   const email = value;
 
@@ -41,7 +57,7 @@ export const validateEmail = (value, elem) => {
   return true;
 };
 
-export const validatePhone = (phoneNumber) => {
+const checkPhone = (phoneNumber) => {
   const value = phoneNumber.replace(/\s/g, '');
 
   if (value.length < MIN_LENGTHS.phone) {
@@ -87,7 +103,7 @@ export const validatePassword = (password, callback) => {
   return true;
 };
 
-export const changeState = (field, bool, value, cb) => {
+const shiftState = (field, bool, value, cb) => {
   if (bool) {
     cb((prev) => {
       return {
@@ -107,3 +123,7 @@ export const changeState = (field, bool, value, cb) => {
     });
   }
 };
+
+export const validateEmail = DEBOUNCE(checkEmail);
+export const validatePhone = DEBOUNCE(checkPhone);
+export const changeState = DEBOUNCE(shiftState);

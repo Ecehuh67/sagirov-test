@@ -42,6 +42,8 @@ const SignUp = ({ changeHandler, userDataHandler }) => {
     color: '',
   });
 
+  console.log(formFields);
+
   return (
     <>
       {isSigned && <Screen cb={changeHandler} type={'sign-up'} />}

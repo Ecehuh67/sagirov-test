@@ -5,7 +5,7 @@ import SignIn from '../sign-in/sign-in';
 const App = () => {
   // save data from sign-up form
   const [userData, setUserData] = React.useState({});
-  const [isSighIn, setSignIn] = React.useState(true);
+  const [isSighIn, setSignIn] = React.useState(false);
 
   return (
     <>
