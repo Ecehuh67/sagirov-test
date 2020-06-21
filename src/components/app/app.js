@@ -3,9 +3,19 @@ import SignUp from '../sign-up/sign-up';
 import SignIn from '../sign-in/sign-in';
 
 const App = () => {
+  // save data from sign-up form
+  const [userData, setUserData] = React.useState({});
   const [isSighIn, setSignIn] = React.useState(false);
 
-  return <>{!isSighIn ? <SignUp handler={setSignIn} /> : <SignIn />}</>;
+  return (
+    <>
+      {!isSighIn ? (
+        <SignUp changeHandler={setSignIn} userDataHandler={setUserData} />
+      ) : (
+        <SignIn />
+      )}
+    </>
+  );
 };
 
 export default App;

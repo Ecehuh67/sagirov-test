@@ -166,10 +166,26 @@
   outline: none;
   background-color: inherit;
   color: black;
+
+  &:hover {
+    color: grey;
+  }
 }
 
 .main__form-wrapper:nth-last-of-type(2) span {
   position: absolute;
   right: 130px;
   top: 15px;
+}
+
+.main-congratulation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-congratulation__passage {
+  font-size: 50px;
+  font-weight: 800;
 }
